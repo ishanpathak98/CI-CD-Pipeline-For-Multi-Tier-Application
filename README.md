@@ -13,18 +13,17 @@ This repository contains the code and configuration files necessary to set up a 
 - Kubernetes tools (`kubectl` and `eksctl`) installed
 
 ## Commands Used
-
-1. ## Update System Packages
-   ```bash
+1. ## Update system packages
+ ```bash
    sudo apt-get update
-  ```bash
-2. ## Clone the GitHub Repository
- 
+  ```
 
-```bash
+2. ## Clone the GitHub Repository
+ ```bash
 git clone https://github.com/ishanpathak98/CI-CD-Pipeline-For-Multi-Tier-Application.git
 cd CI-CD-Pipeline-For-Multi-Tier-Application/
 ```
+
 ## Navigate to Application Code
 
 ```bash
