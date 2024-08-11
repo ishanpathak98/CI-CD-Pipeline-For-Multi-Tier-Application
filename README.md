@@ -58,14 +58,14 @@ docker run -d -p 8080:8080 three-tier-backend:latest
 
 ## Install AWS CLI
 
-``bash
+```bash
 
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 sudo apt install unzip
 unzip awscliv2.zip
 sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin --update
 aws configure
-``
+```
 ## Push Docker Images to AWS ECR
 
 ```bash
@@ -104,8 +104,8 @@ kubectl get pods -n workshop
 ```
 ## Integrate MongoDB with the Application
 
-    Create MongoDB Deployment and Service
-    Ensure that MongoDB is deployed within your Kubernetes cluster or accessible externally. You can create a Kubernetes Deployment and Service for MongoDB if it’s not already deployed:
+   Create MongoDB Deployment and Service
+   Ensure that MongoDB is deployed within your Kubernetes cluster or accessible externally. You can create a Kubernetes Deployment and Service for MongoDB if it’s not already deployed:
 
     yaml
 
