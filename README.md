@@ -25,64 +25,61 @@ This repository contains the code and configuration files necessary to set up a 
 git clone https://github.com/ishanpathak98/CI-CD-Pipeline-For-Multi-Tier-Application.git
 cd CI-CD-Pipeline-For-Multi-Tier-Application/
 ```
-Clone the GitHub Repository
+# Multi-Tier Application Deployment
 
-bash
+## Navigate to Application Code
 
-git clone https://github.com/ishanpathak98/CI-CD-Pipeline-For-Multi-Tier-Application.git
-cd CI-CD-Pipeline-For-Multi-Tier-Application/
-
-Navigate to Application Code
-
-bash
-
+```bash
 cd Application-Code/
+```
 
 Install Docker
 
-bash
+```bash
 
 sudo apt install docker.io
 sudo usermod -aG docker $USER
 sudo chown $USER /var/run/docker.sock
-
+```
 Build Docker Images
 
-bash
+```bash
 
 cd backend/
 docker build -t three-tier-backend .
 cd ../frontend/
 docker build -t three-tier-frontend .
+```
+## Run Docker Containers
 
-Run Docker Containers
+To run the Docker containers for the frontend and backend:
 
-bash
-
+```bash
 docker run -d -p 3000:3000 three-tier-frontend:latest
 docker run -d -p 8080:8080 three-tier-backend:latest
+```
 
-Install AWS CLI
+## Install AWS CLI
 
-bash
+``bash
 
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 sudo apt install unzip
 unzip awscliv2.zip
 sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin --update
 aws configure
+``
+## Push Docker Images to AWS ECR
 
-Push Docker Images to AWS ECR
-
-bash
+```bash
 
 aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/b7m8i4f8
 docker tag three-tier-frontend:latest public.ecr.aws/b7m8i4f8/three-tier-frontend:latest
 docker push public.ecr.aws/b7m8i4f8/three-tier-frontend:latest
+```
+## Install Kubernetes Tools
 
-Install Kubernetes Tools
-
-bash
+```bash
 
 curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
 chmod +x ./kubectl
@@ -92,23 +89,23 @@ kubectl version --short --client
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
+```
+## Create EKS Cluster
 
-Create EKS Cluster
-
-bash
+```bash
 
 eksctl create cluster --name three-tier-cluster --region us-west-2 --node-type t2.medium --nodes-min 2 --nodes-max 2
 aws eks update-kubeconfig --region us-west-2 --name three-tier-cluster
+```
+## Deploy Kubernetes Resources
 
-Deploy Kubernetes Resources
-
-bash
+```bash
 
 kubectl create namespace workshop
 kubectl apply -f deploy.yaml -n workshop
 kubectl get pods -n workshop
-
-Integrate MongoDB with the Application
+```
+## Integrate MongoDB with the Application
 
     Create MongoDB Deployment and Service
     Ensure that MongoDB is deployed within your Kubernetes cluster or accessible externally. You can create a Kubernetes Deployment and Service for MongoDB if it’s not already deployed:
