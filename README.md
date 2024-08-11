@@ -104,10 +104,11 @@ kubectl get pods -n workshop
 ```
 ## Integrate MongoDB with the Application
 
-   Create MongoDB Deployment and Service
+## Create MongoDB Deployment and Service
    Ensure that MongoDB is deployed within your Kubernetes cluster or accessible externally. You can create a Kubernetes Deployment and Service for MongoDB if it’s not already deployed:
 
-    yaml
+
+   ```yaml
 
 apiVersion: apps/v1
 kind: Deployment
@@ -147,11 +148,11 @@ spec:
     - protocol: TCP
       port: 27017
       targetPort: 27017
-
-Update Backend Configuration
+```
+## Update Backend Configuration
 Modify the backend configuration to connect to the MongoDB service. Update the MongoDB connection string in your backend application code to point to the MongoDB service:
 
-javascript
+```javascript
 
 const mongoose = require('mongoose');
 const dbURI = 'mongodb://root:example@mongodb-service:27017/mydatabase?authSource=admin';
@@ -159,7 +160,7 @@ const dbURI = 'mongodb://root:example@mongodb-service:27017/mydatabase?authSourc
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
-
+```
 Deploy the Backend with MongoDB Integration
 Redeploy the backend service to ensure it connects to the MongoDB instance:
 
