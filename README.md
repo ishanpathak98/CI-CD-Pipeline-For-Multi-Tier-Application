@@ -14,26 +14,24 @@ This repository contains the code and configuration files necessary to set up a 
 
 ## Commands Used
 
-1. **Update System Packages**
+1. ## Update System Packages
    ```bash
    sudo apt-get update
   ```bash
-
-2. **Clone the GitHub Repository**  
+2. ## Clone the GitHub Repository
+ 
 
 ```bash
 git clone https://github.com/ishanpathak98/CI-CD-Pipeline-For-Multi-Tier-Application.git
 cd CI-CD-Pipeline-For-Multi-Tier-Application/
 ```
-# Multi-Tier Application Deployment
-
 ## Navigate to Application Code
 
 ```bash
 cd Application-Code/
 ```
 
-Install Docker
+## Install Docker
 
 ```bash
 
@@ -41,7 +39,7 @@ sudo apt install docker.io
 sudo usermod -aG docker $USER
 sudo chown $USER /var/run/docker.sock
 ```
-Build Docker Images
+## Build Docker Images
 
 ```bash
 
@@ -173,29 +171,25 @@ bash
 Dockerfile for Frontend
 
 Dockerfile
-
+```
 FROM node:14
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
 CMD ["npm", "start"]
-
+```
 Dockerfile for Backend
 
 Dockerfile
-
+```
 FROM node:14
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
 CMD ["node", "index.js"]
-
-Additional Notes
-
-    Node.js Version: Verify the Node.js/JavaScript version used for development in the package.json file.
-    Service and Ingress: Internal communication between services within the Kubernetes cluster is managed by Kubernetes services. For external access, an ingress or load balancer is required.
+```
 
 Testing the Application
 
